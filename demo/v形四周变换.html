@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--
+			1.需要一个按钮，和五个div，当点击按钮的时候让div显示出来
+			2.通过定位控制div的位置
+			3.通过点击按钮让div变换 不同的方向
+		-->
+		<style>
+		#wrap {
+			position: relative;
+		}
+		div {
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			background: red;
+			font: 24px/100px "宋体";
+			color: #fff;
+			text-align: center;
+		}
+		</style>
+		<script>
+			window.onload = function() {
+				var btn = document.getElementById('btn');
+				var wrap = document.getElementById('wrap');
+				var divs = document.getElementsByTagName('div');
+				var now = 0;
+				btn.onclick = function() {
+					if(now%4 == 0) {
+						fn1();
+					}else if(now%4 == 1) {
+						fn2();
+					}else if(now%4 == 2) {
+						fn3();
+					}else {
+						fn4();
+					}
+					now++;
+				};
+				function fn1() {
+					var t = 0;
+					var l = 0;
+					for(var i =0; i < divs.length; i++) {
+						divs[i].style.cssText = "left:" + (l * 100) + "px;top:" + (t * 100) + "px";
+						t++;
+						if(i<2) {
+							l++;
+						}else {
+							l--;
+						}
+					}
+				}
+				function fn2() {
+					var t = 0;
+					var l = 0;
+					for(var i =0; i < divs.length; i++) {
+						divs[i].style.cssText = "left:" + (l * 100) + "px;top:" + (t * 100) + "px";
+						l++;
+						if(i<2) {
+							t++;
+						}else {
+							t--;
+						}
+					}
+				}
+				function fn3() {
+					var t = 0;
+					var l = 4;
+					for(var i =0; i < divs.length; i++) {
+						divs[i].style.cssText = "left:" + (l * 100) + "px;top:" + (t * 100) + "px";
+						t++;
+						if(i<2) {
+							l--;
+						}else {
+							l++;
+						}
+					}
+				}
+				function fn4() {
+					var t = 4;
+					var l = 0;
+					for(var i =0; i < divs.length; i++) {
+						divs[i].style.cssText = "left:" + (l * 100) + "px;top:" + (t * 100) + "px";
+						l++;
+						if(i<2) {
+							t--;
+						}else {
+							t++;
+						}
+					}
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<input type="button" value="按钮" id="btn" />
+		<section id="wrap">
+			<div>0</div>
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+		</section>
+	</body>
+</html>

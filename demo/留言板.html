@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		body,
+		h2,
+		h3 {
+			margin: 0;
+		}
+		.wrap {
+			width: 500px;
+			margin: 30px auto;
+		}
+		h2 {
+			border-bottom: 1px solid #000;
+		}
+		#message {
+			padding: 30px;
+			border-bottom: 1px solid #000;
+			font: 18px/24px "宋体";
+		}
+		h3 {
+			padding: 20px 0;
+		}
+		#box {
+			width: 500px;
+			height: 200px;
+			border: 1px solid #000;
+			font: 16px/20px "宋体"; 
+			overflow: auto;
+			resize: none;
+		}
+		#btn {
+			width: 502px;
+			height: 50px;
+			margin-top: 5px;
+			text-align: center;
+		}
+		.box1 {
+			width: 400px;
+			margin-top: 10px;
+		}
+		.active {
+			background: pink;
+		}
+		</style>
+		<script>
+			window.onload = function() {
+				var message = document.getElementById('message');
+				var box = document.getElementById('box');
+				var box1 = document.querySelector('.box1');
+				var ps = document.getElementsByTagName('p');
+				var btn = document.getElementById('btn');
+				var now = 0;
+				var arr = ["red","green","blue"]
+				btn.onclick = function() {
+					now++;
+					message.innerHTML += '<p class="box1" style="background:' + arr[now%arr.length] + '">' + box.value + '</p>';
+					for(var i = 0; i < ps.length; i++) {
+						ps[i].color = ps[i].style.background;
+						ps[i].onmouseover = function() {
+							this.oldColor = this.style.background;
+							this.style.background = "yellow";
+						};
+						ps[i].index = i;
+						ps[i].onclick = function() {
+							if(this.style.background == "pink") {
+								this.style.background = this.color;
+							}else {
+								this.style.background = "pink";
+							}
+							this.oldColor = this.style.background;
+						};
+						ps[i].onmouseout = function() {
+							this.style.background = this.oldColor;
+						};
+					}
+				};
+				
+				
+			};
+		</script>
+	</head>
+	<body>
+		<section class="wrap">
+			<h2>留言板</h2>
+			<div id="message"></div>
+			<h3>请输入留言内容</h3>
+			<textarea id="box"></textarea>
+			<input type="button" value="发表留言" id="btn"/>
+		</section>
+	</body>
+</html>
